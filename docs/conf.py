@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # Steamfront documentation build configuration file, created by
-# sphinx-quickstart on Tue Jan 17 23:50:15 2017.
+# sphinx-quickstart on Wed Jan 18 21:33:10 2017.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -21,10 +21,6 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
 
-import sphinx_rtd_theme
-html_theme = "sphinx_rtd_theme"
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
-
 
 # -- General configuration ------------------------------------------------
 
@@ -36,6 +32,8 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.autodoc',
+    'sphinx.ext.doctest',
+    'sphinx.ext.coverage',
     'sphinx.ext.viewcode']
 
 # Add any paths that contain templates here, relative to this directory.
@@ -88,7 +86,7 @@ todo_include_todos = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-# html_theme = 'alabaster'
+html_theme = 'alabaster'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -158,5 +156,7 @@ texinfo_documents = [
      'Miscellaneous'),
 ]
 
-
+import sphinx_rtd_theme
+html_theme = "sphinx_rtd_theme"
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 

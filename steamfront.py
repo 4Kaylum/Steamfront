@@ -27,24 +27,21 @@ Todo ::
 
 
 class NeedsAPIKey(Exception):
-    """
-    This function cannot be used without an API key
+    """This function cannot be used without an API key
     """
 
     pass
 
 
 class GameDoesNotExist(Exception):
-    """
-    The given game's ID does not exist on Steam
+    """The given game's ID does not exist on Steam
     """
 
     pass
 
 
 class UserDoesNotExist(Exception):
-    """
-    The given user's ID or ID64 does not exist
+    """The given user's ID or ID64 does not exist
     """
 
     pass
@@ -53,8 +50,7 @@ class UserDoesNotExist(Exception):
 class User:
 
     def __init__(self, id64:str, isId64:bool=True):
-        """
-        Information given for a Steam user
+        """Information given for a Steam user
 
         Parameters
         ----------
@@ -94,8 +90,7 @@ class User:
 class UserGame:
 
     def __init__(self, data):
-        """
-        Describes the relation between a user and a game
+        """Describes the relation between a user and a game
         Generally should not be called
         """
         
@@ -125,8 +120,7 @@ class UserGame:
         return self.game_id
 
     def get_game(self):
-        """
-        Gets the game object for the game relation being described
+        """Gets the game object for the game relation being described
 
         Returns
         ----------
@@ -140,8 +134,7 @@ class UserGame:
 class Game:
     
     def __init__(self, gameID:str):
-        """
-        A container for the information of a game on Steam
+        """A container for the information of a game on Steam
 
         Parameters
         ----------
@@ -152,6 +145,24 @@ class Game:
         ----------
         :class:`GameDoesNotExist`
             If the given ID does not show a game, the class will throw steamfront.GameDoesNotExist
+
+        Attributes
+        ----------
+        game_id : ``str``
+            The app id that was passed into the class on generation
+        name : ``str``
+            The name of the app that was fond on the API
+        type : ``str``
+        required_age : ``str``
+        detailed_description : ``str``
+        about_the_game : ``str``
+        developers : ``list``
+        publishers : ``list``
+        categories: ``list``
+        genres ``list``
+        screenshots : ``list``
+        release_date : ``dict``
+        price : ``dict``
         """
 
         get_game = 'http://store.steampowered.com/api/appdetails?appids={}&format=json'
@@ -210,27 +221,30 @@ class Game:
 class Steamfront:
     
     def __init__(self, *, api_key:str=None):
-        """ 
-        Provides a front for the Steam store and all relevant applications and data
+        """Provides a front for the Steam store and all relevant applications and data
 
         Parameters
         ----------
-        api_key : (Optional [str])
+        api_key : Optional[``str``]
             The key used for API functions
             This is not required for all methods, but a good few of them.
             Defaults to ``None``.
+
+        Attributes
+        ----------
+        api_key : Optional[``str``]
+            The api key that was passed when the class was created.
         """
 
         self.api_key = api_key
-        self.steam_games = None
+        self._steam_games = None
         #self.needs_key = lambda: raise NeedAPIKey
 
         # Populate game list
-        self.get_steam_games()
+        self._get_steam_games()
 
-    def get_steam_games(self) -> list:
-        """
-        Gives a list of all games on Steam
+    def _get_steam_games(self) -> list:
+        """Gives a list of all games on Steam
 
         Returns
         ----------
@@ -248,12 +262,11 @@ class Steamfront:
         game_list = json_games['applist']['apps']['app']
 
         # Store everything nicely
-        self.steam_games = game_list
+        self._steam_games = game_list
         return game_list
 
     def get_game_from_id(self, appid:str) -> Game:
-        """
-        Gets the information of a game from an appid.
+        """Gets the information of a game from an appid.
         Just calls :class:`Game` with the id passed into it.
 
         Parameters
@@ -274,8 +287,7 @@ class Steamfront:
         return Game(appid)
 
     def get_game_from_name(self, name:str, *, refresh:bool=False, case_sensitive:bool=True) -> Game:
-        """
-        Gets the data from a game via its name
+        """Gets the data from a game via its name
         Not guarenteed to be accurate
         Will return a list of given results
 
@@ -283,9 +295,9 @@ class Steamfront:
         ----------
         name : str
             The name of the game you're trying to get
-        refresh : (Optional [bool])
+        refresh : Optional[bool]
             Determines whether or not to repopulate the internal game list. Defaults to ``False``.
-        case_sensitive : (Optional [bool])
+        case_sensitive : Optional[bool]
             Determines whether your search is case sensitive or not. Defaults to ``True``.
 
         Returns
@@ -298,14 +310,14 @@ class Steamfront:
         """
 
         if refresh:
-            self.get_steam_games()
+            self._get_steam_games()
 
         if case_sensitive:
             namecheck = lambda x, y: x == y 
         else:
             namecheck = lambda x, y: x.lower() == y.lower()
 
-        for i in self.steam_games:
+        for i in self._steam_games:
             if namecheck(i['name'], name):
                 g = Game(i['appid'])
                 return g
@@ -313,8 +325,7 @@ class Steamfront:
         return False
 
     def get_games_from_search(self, name:str, *, refresh:bool=False, case_sensitive:bool=True) -> list:
-        """
-        Gets a list of all the names matching a game via its name
+        """Gets a list of all the names matching a game via its name
         Not guarenteed to be accurate
         Will return a list of given results
 
@@ -322,9 +333,9 @@ class Steamfront:
         ----------
         name : str
             The name of the game you're trying to get
-        refresh : (Optional [bool])
+        refresh : Optional[bool]
             Determines whether or not to repopulate the internal game list. Defaults to ``False``.
-        case_sensitive : (Optional [bool])
+        case_sensitive : Optional[bool]
             Determines whether your search is case sensitive or not. Defaults to ``True``.
 
         Returns
@@ -335,7 +346,7 @@ class Steamfront:
         """
 
         if refresh:
-            self.get_steam_games()
+            self._get_steam_games()
 
         if case_sensitive:
             namecheck = lambda x, y: x == y 
@@ -344,7 +355,7 @@ class Steamfront:
 
         game_tuple = []
 
-        for i in self.steam_games:
+        for i in self._steam_games:
             if namecheck(i['name'], name):
                 n = i['name']
                 d = i['appid']
