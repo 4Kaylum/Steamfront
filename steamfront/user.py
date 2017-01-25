@@ -5,15 +5,15 @@ import xml.etree.ElementTree as _ET
 
 class User(object):
     """
-    Information given for a Steam user
+    Information for a given Steam user
 
-    Parameters
-    ----------
-    id64 : str
-        This will be the ID64 of the user in question
-        To get a user from an steamID instead of id64, pass `isId64` as False
-    isId64 : str
-        Determines whether or not to parse the id input as id64 or steamID. Defaults to ``True``.
+    :param str id64: The ID64 of a given user.
+    :param bool isId64: Determines whether to parse as name or ID64. Defaults to ``True``.
+    :ivar root: The raw data from the Steam API.
+    :ivar id64: The ID64 of the user.
+    :ivar id: The Steam ID/name of the user.
+    :ivar games: A list of :class:`UserGame` for all games in the user's library.
+    :raises UserDoesNotExist:
     """
 
     def __init__(self, id64:str, isId64:bool=True):
@@ -48,42 +48,43 @@ class UserGame(object):
     """
     Describes the relation between a user and a game
     Generally should not be called
+
+    :param data: The raw user game data.
+    :ivar game: The :class:`steamfront.game.Game` object for the given game. Will be ``None`` until :meth:`get_game` is called.
+    :ivar name: The name of the game.
+    :ivar game_id: The ID of the game.
+    :ivar store_link: The link to the game's store page.
+    :ivar stats: The gloabl stats for the game. May be ``None``.
+    :ivar player_stats: The player's stats for the game. May be ``None``.
+    :ivar play_time: The total hours of play time that the user has in the game.
     """
 
     def __init__(self, data):
         
         datafinder = lambda x: data.findall(x)[0].text
         self.game = None
-        '''The :class:`Game` object. Is ``None`` unless `get_game` is called.'''
         self.raw = data
-        '''The raw user data for the game.'''
         self.name = datafinder('name')
-        '''The name of the game.'''
         self.game_id = datafinder('appID')
-        '''The game's app id.'''
         self.store_link = datafinder('storeLink')
-        '''The store link to the game.'''
 
         self.stats = None
-        '''The global stats for the game. May be ``None``.'''
         try:
             self.stats = datafinder('globalStatsLink')
         except IndexError:
             self.stats = None
 
         self.player_stats = None
-        '''The user's stats for the game. May be ``None``.'''
         try:
             self.player_stats = datafinder('statsLink')
         except IndexError:
             self.player_stats = None
 
         self.play_time = None
-        '''The user's stats for the game. May be ``None``.'''
         try:
             self.play_time = datafinder('hoursOnRecord')
         except IndexError:
-            self.play_time = None
+            self.play_time = 0.0
 
     def __str__(self):
         return self.game_id
@@ -91,10 +92,8 @@ class UserGame(object):
     def get_game(self):
         """Gets the game object for the game relation being described
 
-        Returns
-        ----------
-        :class:`Game`
-            Gets the game object of the user game link.
+        :return: The :class:`steamfront.game.Game` object for the given game.
+        :rtype: :class:`steamfront.game.Game`
         """
 
         if self.game == None:

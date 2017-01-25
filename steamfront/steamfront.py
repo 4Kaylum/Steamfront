@@ -8,20 +8,14 @@ class Client(object):
     """
     Provides a front for the Steam store and all relevant applications and data
 
-    Parameters
-    ----------
-        api_key : Optional[``str``]
-                The key used for API functions. This is not required for all methods, but a good few of them.
-
-    Attributes
-    ----------
-        api_key : The api key that was passed when the class was created. May be ``None``.
+    :param str api_key: The key used for API functions. This is not required for all methods, but a good few of them. Defaults to ``None``.
+    :type api_key: str or None
+    :ivar api_key: The api key that was passed when the class was created. Can be ``None``.
     """
     
     def __init__(self, *, api_key:str=None):
 
         self.api_key = api_key
-        # '''The API key that was input with the class.'''
         self._steam_games = None
 
         # Populate game list
@@ -46,16 +40,11 @@ class Client(object):
     def get_game_from_id(self, appid:str) -> Game:
         """
         Gets the information of a game from an appid.
-        Just calls :class:`Game` with the id passed into it.
+        Just calls :class:`steamfront.game.Game` with the id passed into it.
 
-        Parameters
-        ----------
-            appid : str, mandatory
-                    The ID of the game you're trying to get.
-
-        Returns
-        ----------
-            game : A :class:`Game` of the ID you entered.
+        :param str appid: The ID of the game you're trying to get.
+        :return: The :class:`steamfront.game.Game` object of the input app ID.
+        :rtype: :class:`steamfront.game.Game`
         """
 
         return Game(appid)
@@ -66,20 +55,12 @@ class Client(object):
         Not guarenteed to be accurate
         Will return a list of given results
 
-        Parameters
-        ----------
-            name : str, mandatory
-                    The name of the game you're trying to find.
-            refresh : bool, optional
-                    Determines whether or not to repopulate the internal game list. Defaults to `False`.
-            case_sensitive : bool, optional
-                    Determines whether your search is case sensitive or not. Defaults to `True`.
-
-        Returns
-        ----------
-            :class:`Game`
-                This will be a game from a name, but it may not give the exact game you asked if there are
-                games with duplicate names. If none are found, `False` is instead returned.
+        :param str name: The name of the game you're trying to find.
+        :param bool refresh: Determines whether or not to repopulate the internal game list. Defaults to `False`.
+        :param bool case_sensitive: Determines whether your search is case sensitive or not. Defaults to `True`.
+        :return: The :class:`steamfront.game.Game` object for a game that matches the name you searched. If none are found, ``False`` is returned.
+        :rtype: :class:`steamfront.game.Game` or ``False``
+        :raises GameDoesNotExist: In rare cases, an internally stored game may give an ID value that does not exist on the store. In that case, this will be thrown.
         """
 
         if refresh:
@@ -103,20 +84,11 @@ class Client(object):
         Not guarenteed to be accurate
         Will return a list of given results
 
-        Parameters
-        ----------
-        name : str
-            The name of the game you're trying to get
-        refresh : Optional[bool]
-            Determines whether or not to repopulate the internal game list. Defaults to ``False``.
-        case_sensitive : Optional[bool]
-            Determines whether your search is case sensitive or not. Defaults to ``True``.
-
-        Returns
-        ----------
-        ``list``
-            This will be a list of ``tuple``s, containing a string of the name of the game as the first item, and the game's ID as 
-            the second item.
+        :param str name: The name of the game you're trying to find.
+        :param bool refresh: Determines whether or not to repopulate the internal game list. Defaults to ``False``.
+        :param bool case_sensitive: Determines whether your search is case sensitive or not. Defaults to ``True``.
+        :return: A list of ``tuple`` as ``(GameName, GameID)``.
+        :rtype: list
         """
 
         if refresh:
@@ -141,15 +113,10 @@ class Client(object):
         """
         Gets a user object from its name
 
-        Parameters
-        ----------
-        name : str
-            The name of the user you're trying to get
-
-        Returns
-        ----------
-        User
-            The user object from the name you're getting
+        :param str name: The name of the user you're trying to find.
+        :return: The :class:`steamfront.user.User` object associated with the given name.
+        :rtype: :class:`steamfront.user.User`
+        :raises UserDoesNotExist: If the given ID does not belong to a user, the class will throw :class:`UserDoesNotExist`.
         """
 
         return User(name, False)
@@ -158,15 +125,10 @@ class Client(object):
         """
         Gets a user object from their ID64
 
-        Parameters
-        ----------
-        id64 : str
-            The ID64 of the user you're trying to get
-
-        Returns
-        ----------
-        User
-            The user object from the ID you're getting
+        :param str id64: The ID64 of the user you're trying to find.
+        :return: The :class:`steamfront.user.User` object associated with the given name.
+        :rtype: :class:`steamfront.user.User`
+        :raises UserDoesNotExist: If the given ID64 does not belong to a user, the class will throw :class:`UserDoesNotExist`.
         """
 
         return User(id64)

@@ -6,7 +6,7 @@ Steamfront is a basic interface for working with Steam and Steampowered through 
 
 There's quite basic usage. For most things you don't need an API key, but for others [you may need to get one](https://steamcommunity.com/dev/apikey).
 
-First you need to make a `Steamfront` object.
+First you need to make a `Client` object.
 
 ```python
 >>> import steamfront
