@@ -31,14 +31,10 @@ class User(object):
 
         # Parse and store the information
         self.root = root = _ET.fromstring(site.content)
-        '''The raw output from the Steam API.'''
         self.id64 = root[0].text
-        '''The user's ID64.'''
         self.id = root[1].text
-        '''The user's SteamID.'''
         games = [i for i in root[2]]
         self.games = [UserGame(i) for i in games]
-        '''A list of :class:`UserGame` for the user.'''
 
     def __str__(self):
         return self.id

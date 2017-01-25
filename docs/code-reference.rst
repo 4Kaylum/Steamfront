@@ -17,11 +17,13 @@ User
 ----------
 
 .. autoclass:: steamfront.user.User
+   :members:
 
 UserGame
 ----------
 
 .. autoclass:: steamfront.user.UserGame
+   :members:
 
 Exceptions
 ----------
