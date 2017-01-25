@@ -46,4 +46,4 @@ Most code is fully internally documented, so it will autofill and properly inter
 
 # API Reference
 
-[Click here](https://github.com/4Kaylum/Steamfront/wiki/API-Reference)
+[Click here](https://steamfront.readthedocs.io/en/latest/index.html)
