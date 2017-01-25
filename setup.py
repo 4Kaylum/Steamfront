@@ -1,7 +1,7 @@
-from setuptools import setup, find_packages
+from distutils.core import setup
 
 
-with open('README.me') as f:
+with open('README.md') as f:
     readme = f.read()
 
 with open('LICENSE') as f:
@@ -15,7 +15,9 @@ setup(
     author='Callum Bartlett',
     author_email='callum.b@techie.com',
     url='https://github.com/4Kaylum/Steamfront',
-    license=license,
-    packages=find_packages(exclude=('docs'))
+    download_url='',
+    keywords=['steam', 'web', 'steamfront', 'steampowered'],
+    classifiers=[],
+    license=license
 )
 
