@@ -1,0 +1,20 @@
+Todo :: 
+* Add Steam game comparisons
+* Add case sensitivity flag
+
+--------------------
+
+* http://steamcommunity.com/id/USERID/games?tab=all&xml=1i
+* http://steamcommunity.com/profiles/USERID64/games?tab=all&xml=1
+-- Both of those return XML of all games
+
+* http://store.steampowered.com/api/appdetails?appids={}&format=json
+-- Gives info of a Steam game via its ID
+
+* http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=XXXXXXXXXXXXXXXXX&steamid=76561197960434622&format=json
+-- Returns owned games of a player from an ID64 and API key
+
+* http://api.steampowered.com/ISteamApps/GetAppList/v0001/
+-- Returns all games on Steam
+
+* https://developer.valvesoftware.com/wiki/Steam_Web_API
