@@ -1,23 +1,30 @@
-from distutils.core import setup
-
-
-with open('README.md') as f:
-    readme = f.read()
-
-with open('LICENSE') as f:
-    license = f.read()
+from setuptools import setup, find_packages
 
 setup(
     name='steamfront',
     version='0.0.1',
     description='A simple plugin to allow you to nicely access things on the Steam API and web server.',
-    long_description=readme,
     author='Callum Bartlett',
     author_email='callum.b@techie.com',
+    license='mit',
     url='https://github.com/4Kaylum/Steamfront',
-    download_url='',
-    keywords=['steam', 'web', 'steamfront', 'steampowered'],
-    classifiers=[],
-    license=license
+    download_url='https://github.com/4Kaylum/Steamfront/tarball/0.0.1',
+    keywords='steam web steamfront steampowered',
+    classifiers=[
+        # How mature is this project? Common values are
+        #   3 - Alpha
+        #   4 - Beta
+        #   5 - Production/Stable
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Developers',
+        'Topic :: Games/Entertainment',
+        'Topic :: Internet',
+        'Topic :: Utilities',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 3'
+    ],
+    install_requires=['requests'],
+    packages=find_packages()
 )
 
