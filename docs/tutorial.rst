@@ -16,7 +16,7 @@ __ https://steamcommunity.com/dev/apikey
 First you need to make a :class:`steamfront.steamfront.Client` object.
 
 	>>> import steamfront
-	>>> sf = steamfront.steamfront.Client()
+	>>> sf = steamfront.Client()
 
 From there, you can get information on a game (through either name or ID), or list the games that a user has, through several methods each.
 

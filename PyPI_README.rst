@@ -15,7 +15,7 @@ First you need to make a `Client` object.
 .. code-block:: python
 
 	>>> import steamfront
-	>>> sf = steamfront.steamfront.Client()
+	>>> sf = steamfront.Client()
 
 From there, you can get information on a game (through either name or ID), or list the games that a user has, through several methods each.
 
