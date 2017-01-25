@@ -12,17 +12,17 @@ class Game(object):
     :ivar required_age: The age that is required to buy the game. Is ``0`` if there is none.
     :ivar detailed_description:  The body text of the description from the store page.
     :ivar about_the_game:
-    :ivar developers:
-    :ivar publishers:
-    :ivar categories:
-    :ivar genres:
-    :ivar screenshots:
-    :ivar release_date: May be ``None``.
-    :ivar dlc: May be ``None``.
-    :ivar price: May be ``None``.
+    :ivar developers: A list of developers that are listed on the Steam page
+    :ivar publishers: A list of publishers that are listed on the Steam page
+    :ivar categories: A list of catergories that are listed on the Steam page
+    :ivar genres: A list of genres that are listed on the Steam page
+    :ivar screenshots: A list of links to URLs that are listed on the Steam page
+    :ivar release_date: A string containing information on the game's release date. May be ``None``.
+    :ivar dlc: A list of :class:`Game` containing the DLC for the game.
+    :ivar price: A dictionary with values 'initial', 'discount_percent', 'final', and 'currency'. May be ``None``.
     :ivar description: May be ``None``.
-    :ivar metacritic: May be ``None``.
-    :ivar game_id:
+    :ivar metacritic: A dictionary with values 'url' and 'score', if there's a Metacritic page linked to the Steam. May be ``None``.
+    :ivar game_id: The ID of the game.
     :raises GameDoesNotExist: If the given ID does not show a game, the class will throw :class:`GameDoesNotExist`.
     """
     
@@ -64,11 +64,11 @@ class Game(object):
         except KeyError:
             pass
 
-        self.dlc = None
-        # try:
-        #     self.dlc = [Game(i) for i in self.raw['dlc']]
-        # except KeyError:
-        #     pass
+        self.dlc = []
+        try:
+            self.dlc = [Game(i) for i in self.raw['dlc']]
+        except KeyError:
+            pass
 
 
         self.description = None
