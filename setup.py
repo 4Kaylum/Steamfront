@@ -1,9 +1,13 @@
 from setuptools import setup, find_packages
 
+with open('PyPI_README.rst') as a:
+    long_description = a.read()
+
 setup(
     name='steamfront',
     version='0.0.1',
     description='A simple plugin to allow you to nicely access things on the Steam API and web server.',
+    long_description=long_description,
     author='Callum Bartlett',
     author_email='callum.b@techie.com',
     license='mit',
