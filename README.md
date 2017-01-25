@@ -2,6 +2,11 @@
 
 Steamfront is a basic interface for working with Steam and Steampowered through Python. It should be pretty simple to use, and if there's anything badly documented here, everything is available on Github for you to look through.
 
+**Installation**:
+```bash
+pip install steamfront
+```
+
 # Getting Started
 
 There's quite basic usage. For most things you don't need an API key, but for others [you may need to get one](https://steamcommunity.com/dev/apikey).
@@ -15,7 +20,7 @@ First you need to make a `Client` object.
 
 From there, you can get information on a game (through either name or ID), or list the games that a user has, through several methods each.
 
-Games:
+**Games**:
 ```python
 >>> g = sf.get_game_from_id('530620')
 >>> g.name
@@ -27,7 +32,7 @@ Games:
 '391540'
 ```
 
-Users:
+**Users**:
 ```python
 >>> u = sf.get_user_from_name('Kaylum-')
 >>> u.id64

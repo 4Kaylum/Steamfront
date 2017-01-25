@@ -2,12 +2,19 @@ Basic Usage
 ======================================
 
 Intro
---------------------------------------
+--------------------
 
 Steamfront is a basic interface for working with Steam and Steampowered through Python. It should be pretty simple to use, and if there's anything badly documented here, everything is available on Github for you to look through.
 
+**Installation**:
+
+.. code-block:: bash
+
+	pip install steamfront
+
+
 Getting Started
---------------------------------------
+--------------------
 
 There's quite basic usage. For most things you don't need an API key, but for others `you may need to get one`__.
 
