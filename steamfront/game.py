@@ -3,26 +3,26 @@ from requests import get as _get
 
 class Game(object):
     """
-    A container for the information of a game on Steam
+    A container for the information of a game on Steam. Any of these attributes may be ``None``.
 
     :param str gameID: The ID of the game that's going to be looked at.
-    :ivar raw: The raw JSON information from Steam.
-    :ivar name: The name of the game as it appears on the Steam store.
-    :ivar type: The type of app that it is, eg game, soundtrack, dlc, etc.
-    :ivar required_age: The age that is required to buy the game. Is ``0`` if there is none.
-    :ivar detailed_description: The body text of the description from the store page.
     :ivar about_the_game: The body text of the description from the store page.
-    :ivar developers: A list of developers that are listed on the Steam page
-    :ivar publishers: A list of publishers that are listed on the Steam page
-    :ivar categories: A list of catergories that are listed on the Steam page
-    :ivar genres: A list of genres that are listed on the Steam page
-    :ivar screenshots: A list of links to URLs that are listed on the Steam page
-    :ivar release_date: A dictionary with values 'coming_soon' and 'date', containing information on the game's release date. May be ``None``.
-    :ivar dlc: A list of :class:`Game` containing the DLC for the game.
-    :ivar price: A dictionary with values 'initial', 'discount_percent', 'final', and 'currency'. May be ``None``.
+    :ivar categories: A list of catergories that are listed on the Steam page.
+    :ivar detailed_description: The body text of the description from the store page.
     :ivar description: May be ``None``.
-    :ivar metacritic: A dictionary with values 'url' and 'score', if there's a Metacritic page linked to the Steam. May be ``None``.
+    :ivar developers: A list of developers that are listed on the Steam page.
+    :ivar dlc: A list of :class:`Game` containing the DLC for the game.
     :ivar game_id: The ID of the game.
+    :ivar genres: A list of genres that are listed on the Steam page.
+    :ivar metacritic: A dictionary with values 'url' and 'score', if there's a Metacritic page linked to the Steam.
+    :ivar name: The name of the game as it appears on the Steam store.
+    :ivar price: A dictionary with values 'initial', 'discount_percent', 'final', and 'currency'.
+    :ivar publishers: A list of publishers that are listed on the Steam page.
+    :ivar raw: The raw JSON information from Steam.
+    :ivar release_date: A dictionary with values 'coming_soon' and 'date', containing information on the game's release date.
+    :ivar required_age: The age that is required to buy the game. Is ``0`` if there is none.
+    :ivar screenshots: A list of links to URLs that are listed on the Steam page
+    :ivar type: The type of app that it is, eg game, soundtrack, dlc, etc.
     :raises GameDoesNotExist: If the given ID does not show a game, the class will throw :class:`GameDoesNotExist`.
     """
     
