@@ -18,3 +18,13 @@ Todo ::
 -- Returns all games on Steam
 
 * https://developer.valvesoftware.com/wiki/Steam_Web_API
+
+-----------------------
+
+Public account:
+['steamid', 'communityvisibilitystate', 'profilestate', 'personaname', 'lastlogoff', 'profileurl', 'avatar', 'avatarmedium', 'avatarfull', 'personastate', 'realname', 'primaryclanid', 'timecreated', 'personastateflags', 'loccountrycode', 'locstatecode', 'loccityid']
+
+Private account:
+['steamid', 'communityvisibilitystate', 'profilestate', 'personaname', 'lastlogoff', 'commentpermission', 'profileurl', 'avatar', 'avatarmedium', 'avatarfull', 'personastate']
+
+Missing attrs from private:

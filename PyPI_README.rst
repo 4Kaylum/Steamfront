@@ -22,7 +22,7 @@ First you need to make a `Client` object.
 .. code-block:: python
 
 	>>> import steamfront
-	>>> sf = steamfront.Client()
+	>>> client = steamfront.Client()
 
 From there, you can get information on a game (through either name or ID), or list the games that a user has, through several methods each.
 
@@ -30,20 +30,23 @@ From there, you can get information on a game (through either name or ID), or li
 
 .. code-block:: python
 
-	>>> g = sf.get_game_from_id('530620')
-	>>> g.name
+	>>> game = client.getApp(appid='530620')
+	>>> game.name
 	'Resident Evil 7 / Biohazard 7 Teaser: Beginning Hour'
-	>>> g.required_age
+	>>> game.required_age
 	'18'
-	>>> g = sf.get_game_from_name('Undertale')
-	>>> g.game_id
+	>>> game = client.getApp(name='Undertale')
+	>>> game.game_id
 	'391540'
 
 **Users**:
 
 .. code-block:: python
 
-	>>> u = sf.get_user_from_name('Kaylum-')
+	>>>
+	>>> "THIS IS NOT AT ALL TRUE. THIS IS IN DEVELOPMENT. PLEASE IGNORE THIS FOR NOW."
+	>>>
+	>>> u = client.get_user_from_name('Kaylum-')
 	>>> u.id64
 	'76561198054243905'
 	>>> gz = u.games

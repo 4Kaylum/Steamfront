@@ -4,30 +4,30 @@ Code Reference
 Client
 ----------
 
-.. automodule:: steamfront.steamfront
+.. autoclass:: steamfront.client.Client
    :members:
 
 Game
 ----------
 
-.. automodule:: steamfront.game
+.. autoclass:: steamfront.game.Game
    :members:
 
 User
 ----------
 
-.. autoclass:: steamfront.user.User
-   :members:
+ autoclass:: steamfront.user.User
+   members:
 
 UserGame
 ----------
 
-.. autoclass:: steamfront.user.UserGame
-   :members:
+ autoclass:: steamfront.user.UserGame
+   members:
 
 Exceptions
 ----------
 
-.. automodule:: steamfront.exceptions
+.. automodule:: steamfront.errors
    :members:
    
