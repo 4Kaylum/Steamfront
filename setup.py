@@ -5,14 +5,14 @@ with open('PyPI_README.rst') as a:
 
 setup(
     name='steamfront',
-    version='0.0.3',
+    version='0.0.4',
     description='A simple plugin to allow you to nicely access things on the Steam API and web server.',
     long_description=long_description,
     author='Callum Bartlett',
     author_email='callum.b@techie.com',
     license='mit',
     url='https://github.com/4Kaylum/Steamfront',
-    download_url='https://github.com/4Kaylum/Steamfront/tarball/0.0.3',
+    download_url='https://github.com/4Kaylum/Steamfront/tarball/0.0.4',
     keywords='steam web steamfront steampowered',
     classifiers=[
         # How mature is this project? Common values are

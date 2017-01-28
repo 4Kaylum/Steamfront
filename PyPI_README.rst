@@ -30,33 +30,32 @@ From there, you can get information on a game (through either name or ID), or li
 
 .. code-block:: python
 
+	>>> client = steamfront.Client()
 	>>> game = client.getApp(appid='530620')
 	>>> game.name
 	'Resident Evil 7 / Biohazard 7 Teaser: Beginning Hour'
 	>>> game.required_age
 	'18'
 	>>> game = client.getApp(name='Undertale')
-	>>> game.game_id
+	>>> game.appid
 	'391540'
 
 **Users**:
 
 .. code-block:: python
 
-	>>>
-	>>> "THIS IS NOT AT ALL TRUE. THIS IS IN DEVELOPMENT. PLEASE IGNORE THIS FOR NOW."
-	>>>
-	>>> u = client.get_user_from_name('Kaylum-')
-	>>> u.id64
-	'76561198054243905'
-	>>> gz = u.games
-	>>> len(gz)
-	138
-	>>> g = gz[0]
-	>>> g.name
-	'Terraria'
-	>>> g.play_time
-	'221'
+	>>> client = steamfront.Client(API_KEY)
+	>>> user = client.getUser(id64='76561198054243905')
+	>>> user.name
+	'Kaylum-'
+	>>> user.status
+	'Online'
+	>>> apps = user.apps
+	>>> len(apps)
+	137
+	>>> rand = apps[44]
+	>>> rand.play_time
+	409
 
 Most code is fully internally documented, so it will autofill and properly interface with Python's `help` function.
 

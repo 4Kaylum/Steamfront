@@ -20,38 +20,44 @@ There's quite basic usage. For most things you don't need an API key, but for ot
 
 __ https://steamcommunity.com/dev/apikey
 
-First you need to make a :class:`steamfront.steamfront.Client` object.
+First you need to make a `Client` object.
+
+.. code-block:: python
 
 	>>> import steamfront
-	>>> sf = steamfront.Client()
+	>>> client = steamfront.Client()
 
 From there, you can get information on a game (through either name or ID), or list the games that a user has, through several methods each.
 
 **Games**:
 
-	>>> g = sf.get_game_from_id('530620')
-	>>> g.name
-	'Resident Evil 7 / Biohazard 7 Teaser: Beginning Hour'
-	>>> g.required_age
-	'18'
-	>>> g = sf.get_game_from_name('Undertale')
-	>>> g.game_id
-	'391540'
+.. code-block:: python
 
+	>>> client = steamfront.Client()
+	>>> game = client.getApp(appid='530620')
+	>>> game.name
+	'Resident Evil 7 / Biohazard 7 Teaser: Beginning Hour'
+	>>> game.required_age
+	'18'
+	>>> game = client.getApp(name='Undertale')
+	>>> game.appid
+	'391540'
 
 **Users**:
 
-	>>> u = sf.get_user_from_name('Kaylum-')
-	>>> u.id64
-	'76561198054243905'
-	>>> gz = u.games
-	>>> len(gz)
-	138
-	>>> g = gz[0]
-	>>> g.name
-	'Terraria'
-	>>> g.play_time
-	'221'
+.. code-block:: python
 
+	>>> client = steamfront.Client(API_KEY)
+	>>> user = client.getUser(id64='76561198054243905')
+	>>> user.name
+	'Kaylum-'
+	>>> user.status
+	'Online'
+	>>> apps = user.apps
+	>>> len(apps)
+	137
+	>>> rand = apps[44]
+	>>> rand.play_time
+	409
 
-Most code is fully internally documented, so it will autofill and properly interface with Python's ``help`` function.
+Most code is fully internally documented, so it will autofill and properly interface with Python's `help` function.

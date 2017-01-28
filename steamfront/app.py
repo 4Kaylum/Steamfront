@@ -6,6 +6,10 @@ class App(object):
     '''
     The app object, providing information on apps on the Steam store.
 
+    .. warning::
+        It should be noted that not all of these attributes will be available for every app, but all will be present. 
+        Make sure that the attributes you want to use do not contain exceptions or `None`.
+
     :param str appid: The ID of an app.
     :ivar raw: The raw return of values from Steam.
     :ivar about_the_game: A `str` containing the 'about the game' section from the Steam store page.
@@ -40,7 +44,7 @@ class App(object):
 
     getGame = 'http://store.steampowered.com/api/appdetails?appids={}&format=json'
 
-    def __init__(self, appid: str, apiKey: str=None):
+    def __init__(self, appid: str):
 
         # Get the site page
         appid = str(appid)

@@ -11,3 +11,8 @@ class AppNotFound(Exception):
 class UserNotFound(Exception):
     '''The specified user was not found on Steam via the API.'''
     pass
+
+
+class APIKeyRequired(Exception):
+    '''Doing this requires an API key.'''
+    pass

@@ -1,7 +1,8 @@
 from requests import get as _get
 from .app import App as _App
-# from .user import User as _User
+from .user import User as _User
 from .errors import AppNotFound as _AppNotFound
+from .errors import MissingArguments as _MissingArguments
 
 
 class Client(object):
@@ -63,42 +64,47 @@ class Client(object):
         :param str name: The name of the app you're getting the object of. May not be 100% accurate. Names are case sensitive.
         :return: The object of relevant data on the app.
         :rtype: :class:`steamfront.app.App`
-        :raises ValueError: Raised if there is neither a name or an app id passed.
+        :raises steamfront.errors.MissingArguments: Raised if there is neither a name or an app id passed.
         :raises steamfront.errors.AppNotFound: Raised if the app or name provided can't be found.
         '''
 
         if appid is not None:
 
             # An app's ID was passed, get its object
-            return _App(appid, apiKey=self._apiKey)
+            return _App(appid)
         elif name is not None:
 
             # A name was passed, get its ID and then return its object
             appid = self._getIDOfApp(name)
-            return _App(appid, apiKey=self._apiKey)
+            return _App(appid)
         else:
 
-            # Neither was passed, raise ValueError
-            raise ValueError('Missing parameters: `name` or `appid`.')
+            # Neither was passed, raise MissingArguments
+            raise _MissingArguments('Missing parameters: `name` or `appid`.')
 
-    # def getUser(self, *, name: str=None, id64: str=None) -> _User:
-    #     '''
-    #     Returns a :class:`steamfront.user.User` of the name or ID64 that was input to the function.
+    def getUser(self, *, name: str=None, id64: str=None) -> _User:
+        '''
+        Returns a :class:`steamfront.user.User` of the name or ID64 that was input to the function.
 
-    #     :param str id64: The ID64 of a user you want the object of.
-    #     :param str name: The Steam ID (name) of a user you want the object of. Names are case sensitive.
-    #     :return: The object of relevant data on the user.
-    #     :rtype: :class:`steamfront.user.User`
-    #     :raises ValueError: Raised if there is neither a name or an ID64 passed.
-    #     '''
+        :param str id64: The ID64 of a user you want the object of.
+        :param str name: The Steam ID (name) of a user you want the object of. Names are case sensitive.
+        :return: The object of relevant data on the user.
+        :rtype: :class:`steamfront.user.User`
+        :raises steamfront.errors.MissingArguments: Raised if there is neither a name or an ID64 passed.
+        '''
 
-    #     if id64 is not None:
+        if id64 is not None:
 
-    #         # A user's ID64 was passed, get its object
-    #         return _User(id64, apiKey=self._apiKey)
+            # A user's ID64 was passed, get its object
+            return _User(id64, apiKey=self._apiKey)
 
-    #     elif name is not None:
+        elif name is not None:
 
-    #         # A user's name was passed, get its ID64 and then return its object
-    #         id64 = self._getIDOfUser(name)
-    #         return _User(id64, apiKey=self._apiKey)
+            # A user's name was passed, get its ID64 and then return its object
+            raise NotImplementedError('This is yet to be implemented. Please use an ID64.')
+            # id64 = self._getIDOfUser(name)
+            # return _User(id64, apiKey=self._apiKey)
+        else:
+
+            # Neither was passed, raise MissingArguments
+            raise _MissingArguments('Missing parameters: `name` or `id64`.')

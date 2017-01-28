@@ -10,20 +10,20 @@ Client
 Game
 ----------
 
-.. autoclass:: steamfront.game.Game
+.. autoclass:: steamfront.app.App
    :members:
 
 User
 ----------
 
- autoclass:: steamfront.user.User
-   members:
+.. autoclass:: steamfront.user.User
+   :members:
 
 UserGame
 ----------
 
- autoclass:: steamfront.user.UserGame
-   members:
+.. autoclass:: steamfront.userapp.UserApp
+   :members:
 
 Exceptions
 ----------
