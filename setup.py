@@ -12,7 +12,7 @@ setup(
     author_email='callum.b@techie.com',
     license='mit',
     url='https://github.com/4Kaylum/Steamfront',
-    download_url='https://github.com/4Kaylum/Steamfront/tarball/0.0.4',
+    download_url='https://github.com/4Kaylum/Steamfront/tarball/0.1.0',
     keywords='steam web steamfront steampowered',
     classifiers=[
         # How mature is this project? Common values are
