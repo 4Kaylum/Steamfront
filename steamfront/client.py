@@ -38,7 +38,7 @@ class Client(object):
         self._appList = gameList
         return gameList
 
-    def _getIDOfApp(self, name: str) -> str:
+    def _getIDOfApp(self, name: str, caseSensitive: bool=True) -> str:
         '''
         Gives the ID of an app whose name you have
         '''
@@ -47,21 +47,26 @@ class Client(object):
         if self._appList == None:
             self._getGamesFromSteam()
 
+        sensitive = lambda x, y: x == y['name']
+        unsensitive = lambda x, y: x.lower() == y['name'].lower()
+        searchStyle = {True: sensitive, False: unsensitive}[caseSensitive]
+
         # Iterate through the list and get the game's name.
         for i in self._appList:
-            if name == i['name']:
+            if searchStyle(name, i):
                 return i['appid']
 
         # No game found, raise error
         raise _AppNotFound(
             'The name `{}` was not found on the API. Try using an app ID.'.format(name))
 
-    def getApp(self, *, name: str=None, appid: str=None) -> _App:
+    def getApp(self, *, name: str=None, appid: str=None, caseSensitive: bool=True) -> _App:
         '''
         Returns a :class:`steamfront.app.App` of the name or app ID that was input to the function.
 
         :param str appid: The ID of the app you're getting the object of. 
-        :param str name: The name of the app you're getting the object of. May not be 100% accurate. Names are case sensitive.
+        :param str name: The name of the app you're getting the object of. May not be 100% accurate.
+        :param bool caseSensitive: Whether or not the name being searched for is case sensitive or not. Has no effect on appid.
         :return: The object of relevant data on the app.
         :rtype: :class:`steamfront.app.App`
         :raises steamfront.errors.MissingArguments: Raised if there is neither a name or an app id passed.
@@ -75,7 +80,7 @@ class Client(object):
         elif name is not None:
 
             # A name was passed, get its ID and then return its object
-            appid = self._getIDOfApp(name)
+            appid = self._getIDOfApp(name, caseSensitive)
             return _App(appid)
         else:
 
