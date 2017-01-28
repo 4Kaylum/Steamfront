@@ -5,7 +5,7 @@ with open('PyPI_README.rst') as a:
 
 setup(
     name='steamfront',
-    version='0.0.4',
+    version='0.1.0',
     description='A simple plugin to allow you to nicely access things on the Steam API and web server.',
     long_description=long_description,
     author='Callum Bartlett',

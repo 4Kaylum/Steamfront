@@ -5,7 +5,7 @@ __title__ = 'Steamfront'
 __author__ = 'Callum Bartlett'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2017 Callum Bartlett'
-__version__ = '0.0.4'
+__version__ = '0.0.5'
 
 if __name__ == '__main__':
 	from sys import argv
